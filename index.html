@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Bro</title>
+</head>
+<body>
+  <div id="main_div">
+    <h1>Chat Bro</h1>
+    <ul id="userList"></ul>
+    </div>
+    <div>
+    <form id="msg_form">
+      <input type="text" id="chat_area" placeholder="Start your chat here">
+      <button type="submit">Send</button>
+    </form>
+    <div id="output"></div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const input = document.getElementById('chat_area');
+    const outputDiv = document.getElementById('output');
+    const form = document.getElementById('msg_form');
+    const userList = document.getElementById('userList')
+
+    const socket = io();
+
+    // Ask username when user opens the page
+    const username = prompt("Enter your name:");
+    socket.emit('join', username);
+
+    //userlists
+    socket.on('userList',(users)=>{
+        userList.innerHTML = ''
+        users.forEach(user => {
+                const li = document.createElement('li')
+                li.textContent = user
+                userList.appendChild(li)
+            })
+
+    })
+
+    // Listen for messages from the server
+    socket.on('msg', (data) => {
+      const p = document.createElement('p');
+      p.textContent = data;
+      outputDiv.appendChild(p);
+    });
+
+    // When user clicks send
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (text) {
+        socket.emit('chatmessage', text);
+        input.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
