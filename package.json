@@ -13,6 +13,16 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "nodemon": "^3.1.10"
-  }
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "socket.io": "^4.8.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Premsaiboga/Chat-Bro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Premsaiboga/Chat-Bro/issues"
+  },
+  "homepage": "https://github.com/Premsaiboga/Chat-Bro#readme"
 }
