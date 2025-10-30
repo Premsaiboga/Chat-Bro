@@ -25,7 +25,7 @@
     const form = document.getElementById('msg_form');
     const userList = document.getElementById('userList')
 
-    const socket = io();
+    const socket = io("https://chat-bro-sufs.onrender.com");
 
     // Ask username when user opens the page
     const username = prompt("Enter your name:");
