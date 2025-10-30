@@ -4,7 +4,14 @@ const { Server } = require('socket.io')
 
 const app = express()
 const server = http.createServer(app)
-const io = new Server(server)
+const io = new Server(server, {
+  cors: {
+    origin: "https://chatbros.netlify.app", // your Netlify URL
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+});
+
 
 // Serve your static HTML file
 app.use(express.static(__dirname))
